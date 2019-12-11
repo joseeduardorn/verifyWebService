@@ -16,9 +16,10 @@
 
 <div class="alert alert-success" role="alert">
   <h4 class="alert-heading">Reporte de seguridad del dispoistivo : <strong> <?php echo $device_name; ?></strong></h4>
-  <p>Configuración segura de sistema Android en base a la guía <strong><a target="_blank" href="https://www.ccn-cert.cni.es/series-ccn-stic/guias-de-acceso-publico-ccn-stic/3040-ccn-stic-453e-seguridad-de-dispositivos-moviles-android-7-x.html">CCN-STIC 453E</a></strong>.</p>
+  <p>Configuración segura de sistema Android en base a la guía <strong><a target="_blank" href="https://www.ccn-cert.cni.es/series-ccn-stic/guias-de-acceso-publico-ccn-stic/3040-ccn-stic-453e-seguridad-de-dispositivos-moviles-android-7-x.html">CCN-STIC 453E</a></strong>. <a href="<?php echo base_url();?>api/view/<?php echo $hash_encode?>"> Ver en linea</a></p>
+
   <hr>
-  <p class="mb-0">Puede descargar el archivo en formato XCCDF de SCAP <a class="btn btn-success" href="<?php echo base_url()."public/files/".$hash_encode.".xccdf"; ?>">aqui</a></p>
+  <p class="mb-0">Puede descargar el archivo en formato XCCDF de SCAP <a class="btn btn-success" href="<?php echo base_url();?>api/download/<?php echo $hash_encode;?>">aqui</a></p>
 </div>
 <br/>
 <div>
@@ -35,7 +36,7 @@
 			<td><?php echo $bluetooth_name;?> </td>
 		</tr>
 		<tr>
-			<td>Assistente de voz</td>
+			<td>Asistente de voz</td>
 			<td><?php echo $voice_assistant;?> </td>
 		</tr>
 		<tr>
@@ -77,86 +78,86 @@
   <tbody>
     <tr>
       <td>Codigo de acceso</td>
-      <td><?php if($device_secure){echo $habilitado;}else{ echo $desabilitado;} ?></td>
+      <td><?php if( filter_var( $device_secure, FILTER_VALIDATE_BOOLEAN) ){echo $habilitado;}else{ echo $desabilitado;} ?></td>
       <td>Habilitado</td>
       <td>Establecerun código de acceso PIN/PASS/PATTERN</td>
     </tr>
     <tr>
       <td>Bluetooth</td>
-      <td><?php if($bluetooth){echo $habilitado;}else{ echo $desabilitado;} ?></td>
+      <td><?php if(filter_var( $bluetooth, FILTER_VALIDATE_BOOLEAN)){echo $habilitado;}else{ echo $desabilitado;} ?></td>
       <td>Desabilitado</td>
       <td>Desactivarlos interfaces inalámbricos de los que no se esté haciendo uso: Wi-Fi, Bluetooth, NFC y datos móviles, que quedan habilitados por defecto tras el proceso  de instalación, aunque  no  se  haya  hecho  uso  de  ellos</td>
     </tr>
     <tr>
       <td>NFC</td>
-      <td><?php if($nfc){echo $habilitado;}else{ echo $desabilitado;} ?></td>
+      <td><?php if(filter_var($nfc, FILTER_VALIDATE_BOOLEAN)){echo $habilitado;}else{ echo $desabilitado;} ?></td>
       <td>Desabilitado</td>
       <td>Se aconseja habilitar el interfaz NFC solo en el momento de hacer uso de él, y proceder a desactivarlo seguidamente.</td>
     </tr>
     <tr>
       <td>GPS</td>
-      <td><?php if($gps){echo $habilitado;}else{ echo $desabilitado;} ?></td>
+      <td><?php if(filter_var($gps, FILTER_VALIDATE_BOOLEAN)){echo $habilitado;}else{ echo $desabilitado;} ?></td>
       <td>Desabilitado</td>
       <td>Desactivar la ubicación.Un ejemplo es el permiso de ubicación para la app "Fotos", que Google incluye para  permitir  la  incorporación  de  coordenadas  geográficas  en  las  fotografías,  opción desaconsejada desde el punto de vista de privacidad</td>
     </tr>
     <tr>
       <td>Zona WIFI (Hotspot)</td>
-      <td><?php if($wifi_hostpot){echo $habilitado;}else{ echo $desabilitado;} ?></td>
+      <td><?php if(filter_var($wifi_hostpot, FILTER_VALIDATE_BOOLEAN)){echo $habilitado;}else{ echo $desabilitado;} ?></td>
       <td>Desabilitado</td>
       <td>Se recomienda  desactivar este ajuste</td>
     </tr>
     <tr>
       <td>Ahorro de energia</td>
-      <td><?php if($power_save){echo $habilitado;}else{ echo $desabilitado;} ?></td>
+      <td><?php if(filter_var($power_save, FILTER_VALIDATE_BOOLEAN) ){echo $habilitado;}else{ echo $desabilitado;} ?></td>
       <td>Habilitado</td>
       <td>Se  recomienda  activar  este  modo  para  prolongar  la  vida  de  la batería</td>
     </tr>
     <tr>
       <td>Modo avion</td>
-      <td><?php if($airplane_mode){echo $habilitado;}else{ echo $desabilitado;} ?></td>
+      <td><?php if(filter_var($airplane_mode, FILTER_VALIDATE_BOOLEAN)){echo $habilitado;}else{ echo $desabilitado;} ?></td>
       <td>Desabilitado</td>
       <td>Se recomienda desactivar este ajuste</td>
     </tr>
     <tr>
       <td>Tonos del teclado</td>
-      <td><?php if($touched_sound){echo $habilitado;}else{ echo $desabilitado;} ?></td>
+      <td><?php if(filter_var($touched_sound, FILTER_VALIDATE_BOOLEAN)){echo $habilitado;}else{ echo $desabilitado;} ?></td>
       <td>Desabilitado</td>
       <td>Se recomienda desactivar este ajuste</td>
     </tr>
     <tr>
       <td>Tonos táctiles del teclado de marcación</td>
-      <td><?php if($dtmf_tone){echo $habilitado;}else{ echo $desabilitado;} ?></td>
+      <td><?php if(filter_var($dtmf_tone, FILTER_VALIDATE_BOOLEAN)){echo $habilitado;}else{ echo $desabilitado;} ?></td>
       <td>Desabilitado</td>
       <td>Se recomienda desactivar este ajuste</td>
     </tr>
     <tr>
       <td>Vibrar al tocar</td>
-      <td><?php if($haptic_feedback){echo $habilitado;}else{ echo $desabilitado;} ?></td>
+      <td><?php if(filter_var($haptic_feedback, FILTER_VALIDATE_BOOLEAN)){echo $habilitado;}else{ echo $desabilitado;} ?></td>
       <td>Desabilitado</td>
       <td>Se recomienda desactivar este ajuste</td>
     </tr>
     <tr>
       <td>Sonido al bloquear pantalla</td>
-      <td><?php if($lock_screen_sounds){echo $habilitado;}else{ echo $desabilitado;} ?></td>
+      <td><?php if(filter_var($lock_screen_sounds, FILTER_VALIDATE_BOOLEAN)){echo $habilitado;}else{ echo $desabilitado;} ?></td>
       <td>Desabilitado</td>
       <td>Se recomienda desactivar este ajuste</td>
     </tr>
     <tr>
       <td>Suspender despues de</td>
       <td><?php echo $screen_off_timeout; ?></td>
-      <td>2</td>
+      <td>2 minutos</td>
       <td>"Suspender después de <X>": este parámetro (que puede tomar valor de [15 segundos,  30  segundos,  1,  2,  5,  10  ó  30  minutos]  determina  cuándo  se apagará la pantalla tras el tiempo de inactividad definido, y es muy relevante por   influenciar   directamente   el   ajuste   "Bloquear  automáticamente",   que bloquea  el  dispositivo  móvil  hasta  la  introducción  del códigode  acceso definido.  Buscando  el  equilibrio entre  seguridad  y  usabilidad, se  recomienda  fijarlo  a  un  máximo  de  1  ó  2 minutos,   pero su   valor dependeráde   la   política   de   seguridad   de   la organización y/o el usuario.</td>
     </tr>
     <tr>
       <td>Mostrar contraseñas</td>
-      <td><?php if($text_show_password){echo $habilitado;}else{ echo $desabilitado;} ?></td>
+      <td><?php if(filter_var($text_show_password, FILTER_VALIDATE_BOOLEAN)){echo $habilitado;}else{ echo $desabilitado;} ?></td>
       <td>Desabilitado</td>
       <td>Se recomienda desactivar este ajuste</td>
     </tr>
     <tr>
-      <td>Bloquear pantalla</td>
+      <td>Bloquear pantalla </td>
       <td><?php echo $lock_screen_after; ?></td>
-      <td>30</td>
+      <td>30 segundos</td>
       <td>El  rango razonable   para   "Suspender  después  de",   buscando   el   equilibrio   entre seguridad  y  usabilidad,  es  de  1  ó  2  minutos,  pero debe  ser  definido  por  la política  de  seguridad  de  la  organización  propietaria  del  dispositivomóvil.  El valor  para  "Bloquear automáticamente"  se  aconseja  que  sea  de entre 5 y  30 segundos.</td>
     </tr>
   </tbody>

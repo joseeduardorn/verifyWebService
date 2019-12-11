@@ -20,4 +20,10 @@ class Device_config_model extends CI_Model{
 		$this->db->insert($this->table_name, $data);
 	}
 
+	public function get_record($hash_encode){
+		$this->db->select('*');
+		$this->db->from('device_config');
+		return $this->db->where('hash_encode',$hash_encode)->get()->row();
+	}
+
 }

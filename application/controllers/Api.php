@@ -89,13 +89,14 @@ class Api extends CI_Controller {
 
 	public function save_file($saveConfig){
 		$file_name = $saveConfig['hash_encode'];
-		$file = 'Some file data';
+		$file = $this->load->view('xccdf_file',$saveConfig,true);
      	$fileSave= false;
      	$strSave = "./public/files/".$file_name.".xccdf";
 	    
 	    if ( ! write_file($strSave, $file)){
 	            $fileSave = true;
 	    }
+	   // return $fileSave;
 	   // return $fileSave;
 	}
 
@@ -175,7 +176,7 @@ class Api extends CI_Controller {
 	             	$dtmf_tone = $arrayConfig['dtmf_tone'];
 	             	$haptic_feedback = $arrayConfig['haptic_feedback'];
 	             	$lock_screen_sounds = $arrayConfig['lock_screen_sounds'];
-	             	$screen_off_timeout = $arrayConfig['screen_off_timeout']/1000;
+	             	$screen_off_timeout = $arrayConfig['screen_off_timeout']/60000;
 	             	$lock_screen_after = $arrayConfig['lock_screen_after']/1000;
 	             	//strings
 	             	$device_name = $arrayConfig['device_name'];
@@ -210,12 +211,12 @@ class Api extends CI_Controller {
 	             	);
 
 	             	$this->send_email($saveConfig);
-	             	//$this->save_file($saveConfig);
+	             	$this->save_file($saveConfig);
 
 	             	$saveInfo = array('config' => json_encode($saveConfig),'hash_encode'=>$hash_encode);
 
 				    //save teh info in DataBase
-	             	//$this->device_config_model->insert( $saveInfo );
+	             	$this->device_config_model->insert( $saveInfo );
 
 
 		        }
@@ -243,6 +244,53 @@ class Api extends CI_Controller {
 		//echo 'Please, send post';
 		}
 		
+	}
+
+	public function file(){
+		$file_name = 'name';
+		$saveConfig = array('data'=>'data');
+		$file = $this->load->view('xccdf_file',$saveConfig,true);
+     	$fileSave= false;
+     	$strSave = "./public/files/".$file_name.".xccdf";
+	    
+	    if ( ! write_file($strSave, $file)){
+	            $fileSave = true;
+	    }
+	}
+
+	public function view($code=null){
+		if(isset($code)){
+			$record  = $this->device_config_model->get_record($code);
+			
+			if($record == null ){
+				echo "Consulta incompleta";
+				exit();
+			}
+	
+			$config = json_decode( $record->config );// json_decode($record->config);
+
+			if(isset($config) ){
+
+				$this->load->view('send_email',$config );
+				//echo $config;
+				//print_r($record->config);
+			}
+
+		}else{
+			echo "Consulta incompleta";
+			exit();
+		}
+		
+	}
+
+	public function donwload($id=null){
+		if($id!=null){
+			$file = "./public/files/".$id.".xccdf";
+			force_download($file, NULL);
+		}else{
+			echo "Consulta incompleta";
+			exit();
+		}
 	}
 
 }
