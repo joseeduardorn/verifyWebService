@@ -24,7 +24,7 @@
 <br/>
 <div>
 	<div class="alert alert-secondary" role="alert">
-		<h2>Informacion General</h2>
+		<h2>Información General</h2>
 	</div>
 	<table class="table">
 		<tr>
@@ -40,15 +40,15 @@
 			<td><?php echo $voice_assistant;?> </td>
 		</tr>
 		<tr>
-			<td>Informacion DHCP</td>
+			<td>Información DHCP</td>
 			<td><?php echo $dhcp_info; ?> </td>
 		</tr>
 		<tr>
-			<td>Version de Android</td>
+			<td>Versión de Android</td>
 			<td><?php echo $device_android_version; ?> </td>
 		</tr>
 		<tr>
-			<td>Version SDK</td>
+			<td>Versión SDK</td>
 			<td><?php echo $device_android_sdk; ?> </td>
 		</tr>
 	</table>
@@ -71,16 +71,16 @@
       <th scope="col">Componente</th>
       <th scope="col">Estado Actual</th>
       <th scope="col">Estado Optimo</th>
-      <th scope="col">Descricion</th>
+      <th scope="col">Descrición</th>
     </tr>
   </thead>
   <?php $habilitado = 'Habilitado'; $desabilitado = 'Desabilitado';?>
   <tbody>
     <tr>
-      <td>Codigo de acceso</td>
+      <td>Código de acceso</td>
       <td><?php if( filter_var( $device_secure, FILTER_VALIDATE_BOOLEAN) ){echo $habilitado;}else{ echo $desabilitado;} ?></td>
       <td>Habilitado</td>
-      <td>Establecerun código de acceso PIN/PASS/PATTERN</td>
+      <td>Establecer un código de acceso Código/Contraseña/Patron dibujado</td>
     </tr>
     <tr>
       <td>Bluetooth</td>
@@ -98,7 +98,7 @@
       <td>GPS</td>
       <td><?php if(filter_var($gps, FILTER_VALIDATE_BOOLEAN)){echo $habilitado;}else{ echo $desabilitado;} ?></td>
       <td>Desabilitado</td>
-      <td>Desactivar la ubicación.Un ejemplo es el permiso de ubicación para la app "Fotos", que Google incluye para  permitir  la  incorporación  de  coordenadas  geográficas  en  las  fotografías,  opción desaconsejada desde el punto de vista de privacidad</td>
+      <td>Desactivar la ubicación. Un ejemplo es el permiso de ubicación para la app "Fotos", que Google incluye para  permitir  la  incorporación  de  coordenadas  geográficas  en  las  fotografías,  opción desaconsejada desde el punto de vista de privacidad</td>
     </tr>
     <tr>
       <td>Zona WIFI (Hotspot)</td>
@@ -107,7 +107,7 @@
       <td>Se recomienda  desactivar este ajuste</td>
     </tr>
     <tr>
-      <td>Ahorro de energia</td>
+      <td>Ahorro de energía</td>
       <td><?php if(filter_var($power_save, FILTER_VALIDATE_BOOLEAN) ){echo $habilitado;}else{ echo $desabilitado;} ?></td>
       <td>Habilitado</td>
       <td>Se  recomienda  activar  este  modo  para  prolongar  la  vida  de  la batería</td>
