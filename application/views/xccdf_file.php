@@ -26,13 +26,13 @@ $date = date('Y-m-d');
 
 $strXML.= '<status date="'.$date.'">accepted</status>
 <title>Configuración Segura de Android 9 SDK: 28,29</title>
-<description>Reporte de configuración segura de sistema Android en base a la guía CCN-STIC 453E.</description>
+<description>Reporte de configuración segura de sistema Android en base a la guía CCN-STIC 453G.</description>
 <notice id="terms-of-use" xml:lang="en"></notice>
 <plain-text id="release-info">Release: 1 Benchmark Date: 10 Dec 2019</plain-text>
 <version>1</version>';
 
 $strXML.='<Profile id="validacion">
-<title>Validacion en base a la Guia CCN-STIC 453E</title>';
+<title>Validacion en base a la Guia CCN-STIC 453G</title>';
 if(!$device_secure_boolean)
    $strXML.='<select idref="no_codigo_de_acceso" selected="true"/>';
 
@@ -79,7 +79,7 @@ $strXML.='</Profile>';
 
 $strXML.= '<Group id="validation_group">
     <title>Lista de verificacion Android 9</title>
-    <description>Lista de verificacion basada en la Guia CCN-STIC 453E</description>';
+    <description>Lista de verificacion basada en la Guia CCN-STIC 453G</description>';
 
 if(!$device_secure_boolean){
 $strXML.= '<Rule id="no_codigo_de_acceso" selected="true" weight="10.0" prohibitChanges="false" abstract="false" role="full" severity="high">

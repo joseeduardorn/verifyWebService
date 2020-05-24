@@ -16,7 +16,7 @@
 
 <div class="alert alert-success" role="alert">
   <h4 class="alert-heading">Reporte de seguridad del dispoistivo : <strong> <?php echo $device_name; ?></strong></h4>
-  <p>Configuración segura de sistema Android en base a la guía <strong><a target="_blank" href="https://www.ccn-cert.cni.es/series-ccn-stic/guias-de-acceso-publico-ccn-stic/3040-ccn-stic-453e-seguridad-de-dispositivos-moviles-android-7-x.html">CCN-STIC 453E</a></strong>. <a href="<?php echo base_url();?>api/view/<?php echo $hash_encode?>"> Ver en linea</a></p>
+  <p>Configuración segura de sistema Android en base a la guía <strong><a target="_blank" href="https://www.ccn-cert.cni.es/pdf/guias/series-ccn-stic/400-guias-generales/3588-ccn-stic-453g-guia-practica-de-seguridad-en-dispositvos-moviles-android-9/file.html">CCN-STIC 453G</a></strong>. <a href="<?php echo base_url();?>api/view/<?php echo $hash_encode?>"> Ver en linea</a></p>
 
   <hr>
   <p class="mb-0">Puede descargar el archivo en formato XCCDF de SCAP <a class="btn btn-success" href="<?php echo base_url();?>api/download/<?php echo $hash_encode;?>">aqui</a></p>

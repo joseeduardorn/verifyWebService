@@ -89,6 +89,7 @@ class Api extends CI_Controller {
 
 	public function save_file($saveConfig){
 		$file_name = $saveConfig['hash_encode'];
+		
 		$file = $this->load->view('xccdf_file',$saveConfig,true);
      	$fileSave= false;
      	$strSave = "./public/files/".$file_name.".xccdf";
@@ -176,6 +177,7 @@ class Api extends CI_Controller {
 	             	$dtmf_tone = $arrayConfig['dtmf_tone'];
 	             	$haptic_feedback = $arrayConfig['haptic_feedback'];
 	             	$lock_screen_sounds = $arrayConfig['lock_screen_sounds'];
+	             	$text_show_password = $arrayConfig['text_show_password'];
 	             	$screen_off_timeout = $arrayConfig['screen_off_timeout']/60000;
 	             	$lock_screen_after = $arrayConfig['lock_screen_after']/1000;
 	             	//strings
@@ -283,7 +285,7 @@ class Api extends CI_Controller {
 		
 	}
 
-	public function donwload($id=null){
+	public function download($id=null){
 		if($id!=null){
 			$file = "./public/files/".$id.".xccdf";
 			force_download($file, NULL);
