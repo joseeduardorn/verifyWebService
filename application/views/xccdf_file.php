@@ -33,6 +33,8 @@ $strXML.= '<status date="'.$date.'">accepted</status>
 
 $strXML.='<Profile id="validacion">
 <title>Validacion en base a la Guia CCN-STIC 453G</title>';
+
+/*
 if(!$device_secure_boolean)
    $strXML.='<select idref="no_codigo_de_acceso" selected="true"/>';
 
@@ -66,14 +68,14 @@ if($haptic_feedback_boolean)
 if($lock_screen_sounds_boolean)
   $strXML.='<select idref="sonido_al_bloquear_pantalla_activado" selected="true"/>';
 
-if($screen_off_timeout==="2")
+if($screen_off_timeout!=="2")
   $strXML.='<select idref="suspender_despues_de_activado" selected="true"/>';
 
 if($haptic_feedback_boolean)
   $strXML.='<select idref="mostrar_contrasena" selected="true"/>';
 
-if($lock_screen_after === "30")
-  $strXML.='<select idref="bloquear_pantalla" selected="true"/>';
+if($lock_screen_after !== "30")
+  $strXML.='<select idref="bloquear_pantalla" selected="true"/>'; */
 
 $strXML.='</Profile>';
 
@@ -84,98 +86,98 @@ $strXML.= '<Group id="validation_group">
 if(!$device_secure_boolean){
 $strXML.= '<Rule id="no_codigo_de_acceso" selected="true" weight="10.0" prohibitChanges="false" abstract="false" role="full" severity="high">
     <title>Código de acceso</title>
-    <ident system="ttps://www.ccn-cert.cni.es/series-ccn-stic/guias-de-acceso-publico-ccn-stic/3040-ccn-stic-453e-seguridad-de-dispositivos-moviles-android-7-x.html">Capitulo 7</ident>
+    <ident system="https://www.ccn-cert.cni.es/pdf/guias/series-ccn-stic/400-guias-generales/3588-ccn-stic-453g-guia-practica-de-seguridad-en-dispositvos-moviles-android-9/file.html">Capitulo 7</ident>
     </Rule>';
   }
 
 if($bluetooth_boolean){
 $strXML.='<Rule id="bluetooth_activo" selected="true" weight="10.0" prohibitChanges="false" abstract="false" role="full" severity="high">
     <title>Bluetooth</title>
-    <ident system="ttps://www.ccn-cert.cni.es/series-ccn-stic/guias-de-acceso-publico-ccn-stic/3040-ccn-stic-453e-seguridad-de-dispositivos-moviles-android-7-x.html">Capitulo 7</ident>
+    <ident system="https://www.ccn-cert.cni.es/pdf/guias/series-ccn-stic/400-guias-generales/3588-ccn-stic-453g-guia-practica-de-seguridad-en-dispositvos-moviles-android-9/file.html">Capitulo 7</ident>
     </Rule>';
 }
 
 if($nfc_boolean){
 $strXML.='<Rule id="nfc_activo" selected="true" weight="10.0" prohibitChanges="false" abstract="false" role="full" severity="high">
     <title>NFC</title>
-    <ident system="ttps://www.ccn-cert.cni.es/series-ccn-stic/guias-de-acceso-publico-ccn-stic/3040-ccn-stic-453e-seguridad-de-dispositivos-moviles-android-7-x.html">Capitulos 7, 13.2</ident>
+    <ident system="https://www.ccn-cert.cni.es/pdf/guias/series-ccn-stic/400-guias-generales/3588-ccn-stic-453g-guia-practica-de-seguridad-en-dispositvos-moviles-android-9/file.html">Capitulos 7, 13.2</ident>
     </Rule>';
 }
 
 if($gps_boolean){
 $strXML.='<Rule id="gps_activo" selected="true" weight="10.0" prohibitChanges="false" abstract="false" role="full" severity="high">
     <title>GPS</title>
-    <ident system="ttps://www.ccn-cert.cni.es/series-ccn-stic/guias-de-acceso-publico-ccn-stic/3040-ccn-stic-453e-seguridad-de-dispositivos-moviles-android-7-x.html">Capitulos 7, 10.3, 12.3, 16.3</ident>
+    <ident system="https://www.ccn-cert.cni.es/pdf/guias/series-ccn-stic/400-guias-generales/3588-ccn-stic-453g-guia-practica-de-seguridad-en-dispositvos-moviles-android-9/file.html">Capitulos 7, 10.3, 12.3, 16.3</ident>
     </Rule>';
 }
 
 if($wifi_hostpot_boolean){
 $strXML.='<Rule id="zona_wifi_activo" selected="true" weight="10.0" prohibitChanges="false" abstract="false" role="full" severity="high">
     <title>Zona WIFI (Hostpot)</title>
-    <ident system="ttps://www.ccn-cert.cni.es/series-ccn-stic/guias-de-acceso-publico-ccn-stic/3040-ccn-stic-453e-seguridad-de-dispositivos-moviles-android-7-x.html">Capitulo 8.3</ident>
+    <ident system="https://www.ccn-cert.cni.es/pdf/guias/series-ccn-stic/400-guias-generales/3588-ccn-stic-453g-guia-practica-de-seguridad-en-dispositvos-moviles-android-9/file.html">Capitulo 8.3</ident>
     </Rule>';
 }
 
 if(!$power_save_boolean){
 $strXML.='<Rule id="ahorro_bateria_desactivado" selected="true" weight="10.0" prohibitChanges="false" abstract="false" role="full" severity="high">
     <title>Ahorro de energía</title>
-    <ident system="ttps://www.ccn-cert.cni.es/series-ccn-stic/guias-de-acceso-publico-ccn-stic/3040-ccn-stic-453e-seguridad-de-dispositivos-moviles-android-7-x.html">Capitulos 8.3, 9.2</ident>
+    <ident system="https://www.ccn-cert.cni.es/pdf/guias/series-ccn-stic/400-guias-generales/3588-ccn-stic-453g-guia-practica-de-seguridad-en-dispositvos-moviles-android-9/file.html">Capitulos 8.3, 9.2</ident>
     </Rule>';
 }
 
 if($airplane_mode_boolean){
 $strXML.='<Rule id="modo_avion_activado" selected="true" weight="10.0" prohibitChanges="false" abstract="false" role="full" severity="high">
     <title>Modo avión</title>
-    <ident system="ttps://www.ccn-cert.cni.es/series-ccn-stic/guias-de-acceso-publico-ccn-stic/3040-ccn-stic-453e-seguridad-de-dispositivos-moviles-android-7-x.html">Capitulo 12.1</ident>
+    <ident system="https://www.ccn-cert.cni.es/pdf/guias/series-ccn-stic/400-guias-generales/3588-ccn-stic-453g-guia-practica-de-seguridad-en-dispositvos-moviles-android-9/file.html">Capitulo 12.1</ident>
     </Rule>';
 }
 
 if($touched_sound_boolean){
 $strXML.='<Rule id="tonos_teclado_activado" selected="true" weight="10.0" prohibitChanges="false" abstract="false" role="full" severity="high">
     <title>Tonos del Teclado</title>
-    <ident system="ttps://www.ccn-cert.cni.es/series-ccn-stic/guias-de-acceso-publico-ccn-stic/3040-ccn-stic-453e-seguridad-de-dispositivos-moviles-android-7-x.html">Capitulo 9.4</ident>
+    <ident system="https://www.ccn-cert.cni.es/pdf/guias/series-ccn-stic/400-guias-generales/3588-ccn-stic-453g-guia-practica-de-seguridad-en-dispositvos-moviles-android-9/file.html">Capitulo 9.4</ident>
     </Rule>';
   }
 
 if($dtmf_tone_boolean){
 $strXML.='<Rule id="tonos_tactiles_teclado_marcacion_activado" selected="true" weight="10.0" prohibitChanges="false" abstract="false" role="full" severity="high">
     <title>Tonos táctiles del teclado de marcación</title>
-    <ident system="ttps://www.ccn-cert.cni.es/series-ccn-stic/guias-de-acceso-publico-ccn-stic/3040-ccn-stic-453e-seguridad-de-dispositivos-moviles-android-7-x.html">Capitulo 9.4</ident>
+    <ident system="https://www.ccn-cert.cni.es/pdf/guias/series-ccn-stic/400-guias-generales/3588-ccn-stic-453g-guia-practica-de-seguridad-en-dispositvos-moviles-android-9/file.html">Capitulo 9.4</ident>
     </Rule>';
   }
 
 if($haptic_feedback_boolean){
 $strXML.='<Rule id="vibrar_al_tocar_activado" selected="true" weight="10.0" prohibitChanges="false" abstract="false" role="full" severity="high">
     <title>Vibrar al tocar</title>
-    <ident system="ttps://www.ccn-cert.cni.es/series-ccn-stic/guias-de-acceso-publico-ccn-stic/3040-ccn-stic-453e-seguridad-de-dispositivos-moviles-android-7-x.html">Capitulo 9.4</ident>
+    <ident system="https://www.ccn-cert.cni.es/pdf/guias/series-ccn-stic/400-guias-generales/3588-ccn-stic-453g-guia-practica-de-seguridad-en-dispositvos-moviles-android-9/file.html">Capitulo 9.4</ident>
     </Rule>';
 }
 
 if($lock_screen_sounds_boolean){
 $strXML.='<Rule id="sonido_al_bloquear_pantalla_activado" selected="true" weight="10.0" prohibitChanges="false" abstract="false" role="full" severity="high">
     <title>Sonido al bloquear pantalla</title>
-    <ident system="ttps://www.ccn-cert.cni.es/series-ccn-stic/guias-de-acceso-publico-ccn-stic/3040-ccn-stic-453e-seguridad-de-dispositivos-moviles-android-7-x.html">Capitulo 9.4</ident>
+    <ident system="https://www.ccn-cert.cni.es/pdf/guias/series-ccn-stic/400-guias-generales/3588-ccn-stic-453g-guia-practica-de-seguridad-en-dispositvos-moviles-android-9/file.html">Capitulo 9.4</ident>
     </Rule>';
 }
 
 if($screen_off_timeout!=="2"){
 $strXML.='<Rule id="suspender_despues_de_activado" selected="true" weight="10.0" prohibitChanges="false" abstract="false" role="full" severity="high">
     <title>Suspender después de</title>
-    <ident system="ttps://www.ccn-cert.cni.es/series-ccn-stic/guias-de-acceso-publico-ccn-stic/3040-ccn-stic-453e-seguridad-de-dispositivos-moviles-android-7-x.html">Capitulos 9.2, 9.3, 10.1, 15.1</ident>
+    <ident system="https://www.ccn-cert.cni.es/pdf/guias/series-ccn-stic/400-guias-generales/3588-ccn-stic-453g-guia-practica-de-seguridad-en-dispositvos-moviles-android-9/file.html">Capitulos 9.2, 9.3, 10.1, 15.1</ident>
     </Rule>';
   }
 
 if($haptic_feedback_boolean){
 $strXML.='<Rule id="mostrar_contrasena" selected="true" weight="10.0" prohibitChanges="false" abstract="false" role="full" severity="high">
     <title>Mostrar contraseñas</title>
-    <ident system="ttps://www.ccn-cert.cni.es/series-ccn-stic/guias-de-acceso-publico-ccn-stic/3040-ccn-stic-453e-seguridad-de-dispositivos-moviles-android-7-x.html">Capitulos 7, 9, 10.1, 10.1.3</ident>
+    <ident system="https://www.ccn-cert.cni.es/pdf/guias/series-ccn-stic/400-guias-generales/3588-ccn-stic-453g-guia-practica-de-seguridad-en-dispositvos-moviles-android-9/file.html">Capitulos 7, 9, 10.1, 10.1.3</ident>
     </Rule>';
   }
 
 if($lock_screen_after !== "30"){
 $strXML.='<Rule id="bloquear_pantalla" selected="true" weight="10.0" prohibitChanges="false" abstract="false" role="full" severity="high">
     <title>Bloquear pantalla</title>
-    <ident system="ttps://www.ccn-cert.cni.es/series-ccn-stic/guias-de-acceso-publico-ccn-stic/3040-ccn-stic-453e-seguridad-de-dispositivos-moviles-android-7-x.html">Capitulos 9, 10.1</ident>
+    <ident system="https://www.ccn-cert.cni.es/pdf/guias/series-ccn-stic/400-guias-generales/3588-ccn-stic-453g-guia-practica-de-seguridad-en-dispositvos-moviles-android-9/file.html">Capitulos 9, 10.1</ident>
     </Rule>';
 }
 
