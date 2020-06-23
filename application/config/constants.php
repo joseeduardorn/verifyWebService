@@ -83,3 +83,9 @@ defined('EXIT_USER_INPUT')     OR define('EXIT_USER_INPUT', 7); // invalid user 
 defined('EXIT_DATABASE')       OR define('EXIT_DATABASE', 8); // database error
 defined('EXIT__AUTO_MIN')      OR define('EXIT__AUTO_MIN', 9); // lowest automatically-assigned error code
 defined('EXIT__AUTO_MAX')      OR define('EXIT__AUTO_MAX', 125); // highest automatically-assigned error code
+
+//global for API Controller
+defined('VERSION')             OR define('VERSION','1.3'); //version of appliaction
+defined('UPDATE_DATE')         OR define('UPDATE_DATE','November 2019');
+defined('EMAIL_FROM')         OR define('EMAIL_FROM','yourconfig@verify.wuhs.info'); //application email for the  system
+

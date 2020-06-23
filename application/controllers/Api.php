@@ -18,104 +18,93 @@ class Api extends CI_Controller {
 	 * map to /index.php/welcome/<method_name>
 	 * @see https://codeigniter.com/user_guide/general/urls.html
 	 */
+	//header('Content-Type: application/json');
 	public function index()
 	{
-		//$this->load->view('welcome_message');
-		$arr = array('version'=>1, 'update'=>'November 2019');    
+		//API version
+		$arr = array('version'=>VERSION, 'update'=>UPDATE_DATE);    
 
-	   //add the header here
-	   	//header('Content-Type: application/json');
+	   //print json
 	    echo json_encode( $arr );
 	
 	}
 	
 	public function send_email($saveConfig)
 	{
-		$email_user = $saveConfig['email_user'];
-		/*
-		$saveConfig = array(
-     		'email_user'=>'email@email.com',
-     		'device_android_version'=>'version 8',
-     		'device_android_sdk'=>'sdk',
-     		'device_secure'=>true,
-     		'bluetooth'=>true,
-     		'nfc'=>true,
-     		'gps'=>false,
-     		'wifi_hostpot'=>true,
-     		'power_save'=>false,
-     		'airplane_mode'=>false,
-     		'voice_assistant'=>true,
-     		'touched_sound'=>false,
-     		'haptic_feedback'=>false,
-     		'lock_screen_sounds'=>true,
-     		'screen_off_timeout'=>'time in second',
-     		'text_show_password'=>true,
-     		'lock_screen_after'=>'time in second',
-     		'device_name'=>'android',
-     		'bluetooth_name'=>'name bluetooth',
-     		'dhcp_info'=>'9.8.9.9',
-     		'hash_encode' => 'dfas',
-    		'created_date' => date('Y-m-d H:i:s'),
-    		'updated_date' => date('Y-m-d H:i:s'),
-    		'file_save' => true
-     	);*/
-		//$this->load->view('send_email',$saveConfig);
-		//$this->load->library('email');
-		$fromemail="yourconfig@verify.wuhs.info";
-		$toemail = $email_user;
+		//get mail provided for user
+		$to_email = $saveConfig['email_user'];
+		
+		//no email address, no email to send
+		if(empty($to_email))
+			return false;
+
 		$subject = "Reporte Configuración Android";
-		//$data=array();
-		// $mesg = $this->load->view('template/email',$data,true);
-		// or
-		//$mesg = $this->load->view('template/email','',true);
+
+		//load view before send
 		$mesg = $this->load->view('send_email',$saveConfig,true);
 
+		//Config for clients read the email
 		$config=array(
-		'charset'=>'utf-8',
-		'wordwrap'=> TRUE,
-		'mailtype' => 'html'
+			'charset'=>'utf-8',
+			'wordwrap'=> TRUE,
+			'mailtype' => 'html'
 		);
 
+		//very clear
 		$this->email->initialize($config);
-		//$this->email->set_header('MIME-Version', '1.0; charset=utf-8');
-		//$this->email->set_header('Content-type', 'text/html');
-		$this->email->to($toemail);
-		$this->email->from($fromemail, "Configuración Android");
+		
+		//prepare email
+		$this->email->to($to_email);
+		$this->email->from(EMAIL_FROM, "Configuración Android");
 		$this->email->subject($subject);
 		$this->email->message($mesg);
+
+		//send email
 		$mail = $this->email->send();
-		//echo $mesg = $this->load->view('send_email',$saveConfig,true);
 	}
 
+
 	public function save_file($saveConfig){
+		
+		$fileSave = false;
+
 		$file_name = $saveConfig['hash_encode'];
+
+		//no file name, can't save
+		if(empty($file_name))
+			return $fileSave;
 		
 		$file = $this->load->view('xccdf_file',$saveConfig,true);
-     	$fileSave= false;
+     	
      	$strSave = "./public/files/".$file_name.".xccdf";
 	    
 	    if ( ! write_file($strSave, $file)){
 	            $fileSave = true;
 	    }
-	   // return $fileSave;
-	   // return $fileSave;
+	    
+	    return $fileSave;
 	}
+
 
 	public function process(){
 
 		$entro = false;
+
+		//is POST method
 		if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    	 	//$config = $this->input->post('config');
-    	    //	$user_email = $this->input->post('user_email');
 			
+    	 	//silly unique hascode
     	 	$id = 1000000+$this->device_config_model->last_id()+1;
 			$hash_encode = base_convert($id, 10, 36);
+
 		    //get hash_encode
 		    //echo intval($str,36);
-		    $array = false;
-		    $created_date = date('Y-m-d H:i:s');
-		    $updated_date = date('Y-m-d H:i:s');
-		    $email_user = 0;
+			//$array = false;
+
+			//get variables coming from request/app
+		    $created_date = date('Y-m-d H:i:s'); //get system date
+		    $updated_date = date('Y-m-d H:i:s'); // get system date
+		    $email_user = 0; //declare false
 		    $device_android_version = 0;
 		    $device_android_sdk = null;
 
@@ -145,6 +134,7 @@ class Api extends CI_Controller {
 		    if(isset( $post_data['email_user']) ){
 		    	$entro = $post_data['email_user'];
 		    }
+
 		   /* if(json_last_error() == JSON_ERROR_NONE)
 		    {
 		        $entro = $post_data;
@@ -159,7 +149,7 @@ class Api extends CI_Controller {
 		        
 		        if (isset( $post_data ['device_android_version'] )) {
 		            
-		            $arrayConfig = $post_data;//$arrayPost['config'][0];
+		            $arrayConfig = $post_data; //$arrayPost['config'][0];
 	             	
 	             	$email_user = $arrayConfig['email_user'];
 	             	$device_android_version = $arrayConfig['device_android_version'];
@@ -222,35 +212,32 @@ class Api extends CI_Controller {
 
 
 		        }
-		        //$device_android_version = $arrayPost['device_android_version'];
+
+
 		    }
 
     	 	$data = array(
-		       // 'config' => $arrayPost,
-		        //'user_email' => $user_email,
 		        'entro'=>$entro,
 		        'hash_encode' => $hash_encode
 		        //'created_date' => $created_date,
 		        //'updated_date' => $updated_date
 			);
 			
-		 echo json_encode($data);
+		//data send to the app
+		echo json_encode($data);
 
 		} else  {
-		
-		//intval($hash_encode,36);
-		//print_r($data);
-        //$arr = array('version'=>1, 'update'=>'November 2019');
-		// echo json_encode($arr);
-		//$this->db->insert('device_config', $data);	
-		//echo 'Please, send post';
+			//nothing
 		}
 		
 	}
 
+	/*
 	public function file(){
 		$file_name = 'name';
+
 		$saveConfig = array('data'=>'data');
+
 		$file = $this->load->view('xccdf_file',$saveConfig,true);
      	$fileSave= false;
      	$strSave = "./public/files/".$file_name.".xccdf";
@@ -258,16 +245,19 @@ class Api extends CI_Controller {
 	    if ( ! write_file($strSave, $file)){
 	            $fileSave = true;
 	    }
-	}
+	}*/
 
+	//view 
 	public function view($code=null){
-		if(isset($code)){
+		
+		if(isset($code) && !empty($code)){
+			//fetch info by code
 			$record  = $this->device_config_model->get_record($code);
 			
 			if($record == null ){
 				echo "Consulta incompleta";
 				exit();
-			}
+		}
 	
 			$config = json_decode( $record->config );// json_decode($record->config);
 
@@ -285,8 +275,10 @@ class Api extends CI_Controller {
 		
 	}
 
+	//method donwload the file
 	public function download($id=null){
-		if($id!=null){
+		if(!is_null($id) && !empty($id) ){
+
 			$file = "./public/files/".$id.".xccdf";
 			force_download($file, NULL);
 		}else{
